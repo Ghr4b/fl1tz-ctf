@@ -1,0 +1,38 @@
+**SSRF Bypass via DNS Rebinding - Rebound Writeup**
+
+### Step 1: Identify Accepted Content Types
+We first test the application's accepted content types and find that it supports both JSON and standard URL-encoded payloads. A key difference is that JSON responses return the site's contents.
+
+### Step 2: Testing for SSRF
+We attempt standard SSRF payloads but find that none work, indicating the presence of anti-SSRF protections.
+
+### Step 3: Bypassing Anti-SSRF Filters
+To bypass the restrictions, we use **DNS rebinding**. We generate a rebinding hostname from [https://lock.cmpxchg8b.com/rebinder.html](https://lock.cmpxchg8b.com/rebinder.html), which resolves to `127.0.0.1`. The generated hostname changes resolution randomly with a very low TTL, increasing the chances of bypassing SSRF protections.
+
+We submit the following payload:
+```json
+{
+    "url": "http://7f000001.acfd7665.rbndr.us:1030/"
+}
+```
+This sometimes returns a response due to the nature of DNS rebinding.
+
+### Step 4: Fuzzing for Users
+After confirming SSRF, we attempt user enumeration by sending:
+```json
+{
+    "url": "http://7f000001.acfd7665.rbndr.us:1030/users"
+}
+```
+This request reveals the **admin's UUID**.
+
+### Step 5: Extracting the Flag
+With the obtained admin UUID, we access:
+```
+http://ctf.fl1tz.me:1030/files/<admin_uuid>/flag.txt
+```
+This successfully retrieves the flag, completing the challenge.
+
+### Conclusion
+By leveraging **DNS rebinding**, we bypassed the anti-SSRF protections and accessed internal resources, ultimately obtaining the flag.
+

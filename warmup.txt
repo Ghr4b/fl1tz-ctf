@@ -1,0 +1,26 @@
+**CTF Write-up: Directory Enumeration and Token Exploitation**
+
+### Step 1: Directory Enumeration
+Using tools like `dirb`, `ffuf`, or `gobuster`, we scanned the target website for hidden directories. This revealed two key directories:
+```
+/request  -> 403 Forbidden
+/logs     -> 403 Forbidden
+```
+
+### Step 2: Fuzzing Hidden Paths
+We then fuzzed these directories further and discovered:
+```
+/logs/admin_login
+/request/authorized_keys
+```
+These endpoints hinted at sensitive information exposure.
+
+### Step 3: Extracting the Token Format
+By examining `/logs/admin_login`, we identified the format of the authentication token used by the application.
+
+### Step 4: Retrieving the Token
+We found an actual token inside `/request/authorized_keys`. This provided us with the necessary credentials.
+
+### Step 5: Gaining Access
+We set the request header to include our retrieved token, granting us access to the restricted area and successfully completing the challenge.
+

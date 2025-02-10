@@ -1,0 +1,25 @@
+**CTF Write-up: Exploiting spatie/browsershot for Local File Read**
+
+### Step 1: Analyzing the Source Code
+By inspecting the source code of the web application, we identified that it uses an outdated and vulnerable version of `spatie/browsershot`.
+
+### Step 2: Finding the Vulnerability
+Looking up this version on [Snyk](https://snyk.io/), we discovered that it is vulnerable to a Local File Inclusion (LFI) attack. Specifically, it allows accessing local files by using the `view-source:file:///` scheme.
+
+### Step 3: Exploiting the Vulnerability
+To read local files, we used the following URL:
+```
+view-source:file:///flag.txt
+```
+This exposed the contents of `flag.txt`, confirming the vulnerability.
+
+### Step 4: Accessing the Screenshot
+The application stores screenshots in a restricted directory, but we bypassed the restriction using directory traversal:
+```
+../forbidden/screenshot_name
+```
+This allowed us to retrieve the stored screenshot, potentially containing sensitive information.
+
+### Conclusion
+By leveraging the known vulnerability in `spatie/browsershot`, we successfully accessed restricted files and retrieved the flag.
+
