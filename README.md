@@ -6,9 +6,9 @@ This repo contains solutions and explanations for challenges from the Fl1tz Mini
 ## 📜 Writeups  
 | Challenge Name       | Writeup Link |
 |---------------------|-------------|
-| Warmup             | [warmup](warmup) |
-| Rebound            | [writeup_rebound](writeup_rebound) |
-| Capture            | [wwriteup_capture](wwriteup_capture) |
+| Warmup             | [warmup](warmup.txt) |
+| Rebound            | [writeup_rebound](rebound.txt) |
+| Capture            | [wwriteup_capture](capture.txt) |
 
 ## 🚀 How to Use  
 Each file contains a detailed explanation of how the challenge was solved. Open them and learn!  
