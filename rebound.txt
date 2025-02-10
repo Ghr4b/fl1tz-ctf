@@ -7,7 +7,9 @@ We first test the application's accepted content types and find that it supports
 We attempt standard SSRF payloads but find that none work, indicating the presence of anti-SSRF protections.
 
 ### Step 3: Bypassing Anti-SSRF Filters
-To bypass the restrictions, we use **DNS rebinding**. We generate a rebinding hostname from [https://lock.cmpxchg8b.com/rebinder.html](https://lock.cmpxchg8b.com/rebinder.html), which resolves to `127.0.0.1`. The generated hostname changes resolution randomly with a very low TTL, increasing the chances of bypassing SSRF protections.
+To bypass the restrictions, we use **DNS rebinding**.
+We generate a rebinding hostname from [https://lock.cmpxchg8b.com/rebinder.html](https://lock.cmpxchg8b.com/rebinder.html), 
+which resolves to `127.0.0.1`. The generated hostname changes resolution randomly with a very low TTL, increasing the chances of bypassing SSRF protections.
 
 We submit the following payload:
 ```json
