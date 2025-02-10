@@ -4,7 +4,7 @@
 By inspecting the source code of the web application, we identified that it uses an outdated and vulnerable version of `spatie/browsershot`.
 
 ### Step 2: Finding the Vulnerability
-Looking up this version on [Snyk](https://snyk.io/), we discovered that it is vulnerable to a Local File Inclusion (LFI) attack. Specifically, it allows accessing local files by using the `view-source:file:///` scheme.
+Looking up this version on [Snyk](https://snyk.io/), we discovered that it is vulnerable. Specifically, it allows accessing local files by using the `view-source:file:///` scheme.
 
 ### Step 3: Exploiting the Vulnerability
 To read local files, we used the following URL:
